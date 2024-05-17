@@ -37,4 +37,24 @@ public class Conto {
         return saldo;
     }
 
+    //metodo versamento
+    public void versareDenaro(double importo) {
+        if (importo > 0 ) {
+            saldo += importo;
+            System.out.println("Versamento di : " + importo + " avenuto con successo" );
+        } else {
+            System.out.println("importo non valido");
+        }
+    }
+
+    public void prelevareDenaro(double importo) {
+        if (importo > 0 && saldo >= importo) {
+            saldo -= importo;
+            System.out.println("prelievo di " + importo + "effettuato");
+        } else {
+            System.out.println("impossibile prelevare saldo insufficente");
+        }
+    }
+
+
 }
