@@ -63,4 +63,20 @@ public class Prodotto {
         this.iva = iva;
     }
 
+    //prezzo con iva
+    public double getPriceWithIva() {
+        return price + ( price * iva/100);
+    }
+
+    public String toString() {
+        return "Prodotto{" +
+                "codice='" + getCode() + '\'' +
+                ", nome='" + name + '\'' +
+                ", descrizione='" + description + '\'' +
+                ", prezzo=" + price +
+                ", iva=" + iva +
+                '}';
+    }
+
+
 }
