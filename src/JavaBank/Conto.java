@@ -1,17 +1,18 @@
 package JavaBank;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 public class Conto {
     private int numeroConto;
     private String nomeProprietario;
-    private double saldo;
+    private BigDecimal saldo;
 
     //Costrutto nuovo conto
     public Conto(String nomeProprietario) {
         this.numeroConto = generateRandomAccountNumber();
         this.nomeProprietario = nomeProprietario;
-        this.saldo = 0.0;
+        this.saldo = BigDecimal.ZERO;
     }
     //generatore numero conto casuale
     private int generateRandomAccountNumber() {
@@ -33,27 +34,36 @@ public class Conto {
         this.nomeProprietario = nomeProprietario;
     }
 
-    public double getSaldo() {
+    public BigDecimal getSaldo() {
         return saldo;
     }
 
     //metodo versamento
-    public void versareDenaro(double importo) {
-        if (importo > 0 ) {
-            saldo += importo;
-            System.out.println("Versamento di : " + importo + " avenuto con successo" );
+    public void versareDenaro(BigDecimal importo) {
+        if (importo.compareTo(BigDecimal.ZERO) > 0) {
+            saldo = saldo.add(importo);
+            System.out.println("Versamento di " + importo + "€ avvenuto con successo.");
         } else {
-            System.out.println("importo non valido");
+            System.out.println("Importo non valido per il versamento.");
         }
     }
 
-    public void prelevareDenaro(double importo) {
-        if (importo > 0 && saldo >= importo) {
-            saldo -= importo;
+    public void prelevareDenaro(BigDecimal importo) {
+        if (importo.compareTo(BigDecimal.ZERO) > 0 && saldo.compareTo(importo) >= 0) {
+            saldo = saldo.subtract(importo);
             System.out.println("prelievo di " + importo + "effettuato");
         } else {
             System.out.println("impossibile prelevare saldo insufficente");
         }
+    }
+
+    //info conto
+    public String getInfoConto() {
+        return "Numero conto: " + numeroConto + "\n" +
+                "Proprietario: " + nomeProprietario + "\n" +
+                "Saldo: " + saldo.setScale(2, BigDecimal.ROUND_HALF_UP) + "€";
+
+
     }
 
 
